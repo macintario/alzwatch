@@ -4,4 +4,6 @@ cd /home/ivan_/alzwatch
 git pull
 echo "Starting ..."
 python --version
-python /home/ivan_/alzwatch/watch.py &
+sleep(2)
+python /home/ivan_/alzwatch/watch.py
+sleep(10)
