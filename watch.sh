@@ -1,6 +1,6 @@
 #/usr/bin/bash
 echo "Updating ..."
-cd /home/ivan/alzwatch
+cd /home/ivan_/alzwatch
 git pull
 echo "Starting ..."
 python /home/ivan_/alzwatch/watch.py
