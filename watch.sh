@@ -3,8 +3,8 @@ echo "Updating ..."
 cd /home/ivan_/alzwatch
 git pull
 echo "Starting ..."
-python --version
+/usr/bin/python --version
 sleep 2
-python /home/ivan_/alzwatch/watch.py
+/usr/bin/python /home/ivan_/alzwatch/watch.py
 sleep 10
 pause
