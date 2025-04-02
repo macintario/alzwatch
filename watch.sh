@@ -1,3 +1,3 @@
 #/usr/bin/bash
 echo "Starting ..."
-python /home/yan/alzwatch/watch.py
+python /home/ivan_/alzwatch/watch.py
