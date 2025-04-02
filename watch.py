@@ -33,7 +33,7 @@ while cap.isOpened():
         kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
         # Apply erosion
         mask_eroded = cv2.morphologyEx(mask_thresh, cv2.MORPH_OPEN, kernel)
-        min_contour_area = 10  # Define your minimum area threshold
+        min_contour_area = 1000  # Define your minimum area threshold
         large_contours = [cnt for cnt in contours if cv2.contourArea(cnt) > min_contour_area]
         frame_out = frame.copy()
         for cnt in large_contours:
