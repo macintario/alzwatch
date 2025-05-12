@@ -1,9 +1,5 @@
 import time
-
 import cv2
-#import gradio as gr
-#import numpy as np
-#import matplotlib.pyplot as plt
 import sqlite3
 conn = sqlite3.connect("movimiento.db")
 conn.execute("create table if not exists movimiento(tiempo TIMESTAMP DEFAULT CURRENT_TIMESTAMP, x integer, y integer);")
