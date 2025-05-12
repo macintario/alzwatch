@@ -4,7 +4,9 @@ import cv2
 #import gradio as gr
 #import numpy as np
 #import matplotlib.pyplot as plt
-
+import sqlite3
+conn = sqlite3.connect("movimiento.db")
+conn.execute("create table if not exists movimiento(tiempo TIMESTAMP DEFAULT CURRENT_TIMESTAMP, x integer, y integer);")
 cap = cv2.VideoCapture(0)
 #cv2.startWindowThread()
 #cv2.namedWindow('Frame_final')
@@ -17,7 +19,7 @@ if not cap.isOpened():
     print("Error opening video file")
 while cap.isOpened():
     # Capture frame-by-frame
-      time.sleep(.2)
+      time.sleep(.1)
       ret, frame = cap.read(cv2.IMREAD_REDUCED_GRAYSCALE_4)
       cv2.waitKey(1)
       if ret:
@@ -43,10 +45,13 @@ while cap.isOpened():
         frame_out = frame.copy()
         for cnt in large_contours:
             x, y, w, h = cv2.boundingRect(cnt)
+            conn.execute("insert into movimiento(x,y) values(?,?)",(x+w/2,y+h/2))
             frame_out = cv2.rectangle(frame, (x, y), (x + w, y + h), (200, 200, 0), 3)
 
         # Display the resulting frame
         cv2.imshow('Frame_final', frame_out)
+        if int(time.time()) % 20 == 0:
+            conn.commit()
         cv2.waitKey(1)
         i=i+1
         if i>1:
