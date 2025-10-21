@@ -10,7 +10,9 @@ gst_pipeline = (
             "appsink"
         )
 
-cap = cv2.VideoCapture(gst_pipeline, cv2.CAP_GSTREAMER)
+#cap = cv2.VideoCapture(gst_pipeline, cv2.CAP_GSTREAMER)
+
+cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
         print("Error: Could not open camera.")
