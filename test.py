@@ -1,17 +1,31 @@
 import cv2
-import numpy as np
-cap = cv2.VideoCapture(0)
-last_mean = 0
-while(True):
-    ret, frame = cap.read()
-    cv2.imshow('frame',frame)
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    result = np.abs(np.mean(gray) - last_mean)
-    if result > 0.3:
-        print(result)
-    last_mean= np.mean(gray)
-    if (cv2.waitKey(1) & 0xFF == ord('q')):
-        break
+
+    # Define your GStreamer pipeline string here
+gst_pipeline = (
+            "v4l2src device=/dev/video0 ! "
+            "video/x-bayer, width=1920, height=1080, framerate=30/1, format=rggb ! "
+            "bayer2rgb ! "
+            "videoconvert ! "
+            "video/x-raw, format=(string)BGR ! "
+            "appsink"
+        )
+
+cap = cv2.VideoCapture(gst_pipeline, cv2.CAP_GSTREAMER)
+
+if not cap.isOpened():
+        print("Error: Could not open camera.")
+        exit()
+
+while True:
+        ret, frame = cap.read()
+        if not ret:
+            print("Error: Could not read frame.")
+            break
+
+        cv2.imshow("IMX219 Feed", frame)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
 cap.release()
 cv2.destroyAllWindows()
