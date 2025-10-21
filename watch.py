@@ -4,7 +4,7 @@ import sqlite3
 conn = sqlite3.connect("movimiento.db")
 
 conn.execute("create table if not exists movimiento(tiempo TIMESTAMP DEFAULT CURRENT_TIMESTAMP, x integer, y integer);")
-cap = cv2.VideoCapture(0) #adaptar para pi-cam
+cap = cv2.VideoCapture("tcp://localhost:1234") #adaptar para pi-cam
 #cv2.startWindowThread()
 #cv2.namedWindow('Frame_final')
 #ret, frame = cap.read()
