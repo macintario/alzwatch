@@ -10,6 +10,7 @@ cap = cv2.VideoCapture("tcp://localhost:1234") #adaptar para pi-cam
 #ret, frame = cap.read()
 #cv2.imshow('Frame_final', frame)
 #cv2.waitKey(1)
+
 backSub = cv2.createBackgroundSubtractorMOG2()
 i=0;
 if not cap.isOpened():
